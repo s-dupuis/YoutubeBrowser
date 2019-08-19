@@ -19,9 +19,4 @@ public class YoutubeWebViewClient extends WebViewClient {
         this.urlManager.setCurrentUrl(url);
     }
 
-    @Override
-    public void onPageFinished(WebView view, String url) {
-        super.onPageFinished(view, url);
-        this.urlManager.setCurrentUrl(url);
-    }
 }
