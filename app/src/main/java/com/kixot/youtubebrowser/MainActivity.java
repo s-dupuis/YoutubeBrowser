@@ -17,6 +17,7 @@ import android.webkit.WebView;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private WebView youtubeWebView;
+    private UrlManager urlManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadYoutubeWebView()  {
-        youtubeWebView = (WebView) findViewById(R.id.youtubeWebView);
-
         String url = "https://www.youtube.com";
 
+        youtubeWebView = (WebView) findViewById(R.id.youtubeWebView);
+        urlManager = new UrlManager(url);
+
+        youtubeWebView.setWebViewClient(new YoutubeWebViewClient(urlManager));
         youtubeWebView.getSettings().setLoadsImagesAutomatically(true);
         youtubeWebView.getSettings().setJavaScriptEnabled(true);
         youtubeWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         youtubeWebView.loadUrl(url);
+
     }
 
     @Override
