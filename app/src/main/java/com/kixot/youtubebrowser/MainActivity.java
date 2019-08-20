@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private WebView youtubeWebView;
     private UrlManager urlManager;
     private FabManager fabManager;
-    private final String url = "https://www.youtube.com";
+    public final String url = "https://m.youtube.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
