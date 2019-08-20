@@ -1,3 +1,4 @@
 • lien youtube en préférence
-• empêcher l'ouverture de liens externes (onPageStarted => tester si url contient "youtube.com")
 • modifier la sortie audio
+• gestion du retour en arrière dans l'historique
+• enregistrer la miniature comme image d'album (mp3)

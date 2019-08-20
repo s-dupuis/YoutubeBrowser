@@ -1,19 +1,24 @@
 package com.kixot.youtubebrowser;
 
+import android.app.AlertDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 
 public class FabManager {
 
     private MainActivity activity;
     private UrlManager urlManager;
+    private YoutubeManager youtubeManager;
     private FloatingActionButton downloadFab, downloadMusicFab, downloadVideoFab;
     private boolean isDownloadFabOpen = false;
 
-    public FabManager (MainActivity activity, UrlManager urlManager) {
+    public FabManager (MainActivity activity, UrlManager urlManager, YoutubeManager youtubeManager) {
         this.activity = activity;
         this.urlManager = urlManager;
+        this.youtubeManager = youtubeManager;
     }
 
     public void loadDownloadFabs() {
@@ -32,7 +37,14 @@ public class FabManager {
         downloadMusicFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "MP3", Snackbar.LENGTH_LONG).setAction("OK", null).show();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
+                View dialogView = activity.getLayoutInflater().inflate(R.layout.download_alertdialog, null);
+                alertDialog.setView(dialogView);
+
+                ImageView thumbnailImageView = (ImageView) dialogView.findViewById(R.id.thumbnailImageView);
+                youtubeManager.downloadThumbnail(thumbnailImageView);
+
+                alertDialog.create().show();
             }
         });
 

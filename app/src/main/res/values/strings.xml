@@ -6,4 +6,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="cut_times">Découpage de la vidéo :</string>
+    <string name="thumbnail">Miniature</string>
+    <string name="to">à</string>
+    <string name="from">de</string>
 </resources>

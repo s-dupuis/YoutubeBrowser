@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private WebView youtubeWebView;
     private UrlManager urlManager;
     private FabManager fabManager;
-    public final String url = "https://m.youtube.com";
+    private YoutubeManager youtubeManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +26,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        urlManager = new UrlManager(url);
-        fabManager = new FabManager(this, urlManager);
+        urlManager = new UrlManager(YoutubeManager.url);
+        youtubeManager = new YoutubeManager(urlManager);
+        fabManager = new FabManager(this, urlManager, youtubeManager);
 
         fabManager.loadDownloadFabs();
 
@@ -50,8 +51,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         youtubeWebView.getSettings().setLoadsImagesAutomatically(true);
         youtubeWebView.getSettings().setJavaScriptEnabled(true);
         youtubeWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        youtubeWebView.loadUrl(url);
-
+        youtubeWebView.loadUrl(YoutubeManager.url);
     }
 
     @Override
