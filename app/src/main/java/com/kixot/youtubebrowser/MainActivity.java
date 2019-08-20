@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private WebView youtubeWebView;
     private UrlManager urlManager;
+    private boolean isDownloadFabOpen = false;
+    private FloatingActionButton downloadMusicFab;
+    private FloatingActionButton downloadVideoFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        loadDownloadFabs();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -45,6 +41,34 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         loadYoutubeWebView();
 
+    }
+
+    private void loadDownloadFabs() {
+        FloatingActionButton downloadFab = (FloatingActionButton) findViewById(R.id.downloadFab);
+        downloadMusicFab = (FloatingActionButton) findViewById(R.id.downloadMusicFab);
+        downloadVideoFab = (FloatingActionButton) findViewById(R.id.downloadVideoFab);
+
+        downloadFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isDownloadFabOpen) closeFABMenu();
+                else showFABMenu();
+            }
+        });
+
+        downloadMusicFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "MP3", Snackbar.LENGTH_LONG).setAction("OK", null).show();
+            }
+        });
+
+        downloadVideoFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "MP4", Snackbar.LENGTH_LONG).setAction("OK", null).show();
+            }
+        });
     }
 
     private void loadYoutubeWebView()  {
@@ -59,6 +83,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         youtubeWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         youtubeWebView.loadUrl(url);
 
+    }
+
+    private void showFABMenu(){
+        isDownloadFabOpen = true;
+        downloadMusicFab.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
+        downloadVideoFab.animate().translationY(-getResources().getDimension(R.dimen.standard_105));
+    }
+
+    private void closeFABMenu(){
+        isDownloadFabOpen = false;
+        downloadMusicFab.animate().translationY(0);
+        downloadVideoFab.animate().translationY(0);
     }
 
     @Override
