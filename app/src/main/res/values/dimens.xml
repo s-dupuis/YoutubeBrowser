@@ -7,7 +7,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
-    <dimen name="standard_55">55dp</dimen>
-    <dimen name="standard_105">105dp</dimen>
-    <dimen name="standard_155">155dp</dimen>
+    <dimen name="first_fab">60dp</dimen>
+    <dimen name="second_fab">115dp</dimen>
+    <dimen name="third_fab">170dp</dimen>
 </resources>

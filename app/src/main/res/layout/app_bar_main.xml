@@ -27,16 +27,18 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="15dp"
-        app:srcCompat="@drawable/baseline_music_note_white_24" />
+        android:layout_margin="20dp"
+        app:srcCompat="@drawable/baseline_music_note_white_24"
+        app:fabCustomSize="45dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/downloadVideoFab"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_gravity="bottom|end"
-        android:layout_margin="15dp"
-        app:srcCompat="@drawable/baseline_movie_white_24" />
+        android:layout_margin="20dp"
+        app:srcCompat="@drawable/baseline_movie_white_24"
+        app:fabCustomSize="45dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/downloadFab"
