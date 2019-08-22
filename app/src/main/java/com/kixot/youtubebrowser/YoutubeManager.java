@@ -9,7 +9,7 @@ import com.kixot.youtubebrowser.asyncTasks.GetVideoDetailsTask;
 
 public class YoutubeManager {
 
-    public static final String url = "https://m.youtube.com";
+    public static final String url = "https://m.youtube.com/";
     public static final String thumbnailUrl = "https://img.youtube.com/vi/[videoId]/hqdefault.jpg";
 
     private UrlManager urlManager;

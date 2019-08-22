@@ -1,14 +1,5 @@
 package com.kixot.youtubebrowser;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.ImageView;
-
-import java.io.InputStream;
-
 public class UrlManager {
 
     private String initialUrl;
@@ -29,6 +20,10 @@ public class UrlManager {
 
     public boolean isYoutube(String url) {
         return url.contains(initialUrl);
+    }
+
+    String getInitialUrl() {
+        return initialUrl;
     }
 
     String getCurrentUrl() {

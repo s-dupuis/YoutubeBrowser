@@ -3,6 +3,8 @@ package com.kixot.youtubebrowser;
 import android.Manifest;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -72,10 +74,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (!urlManager.getCurrentUrl().equals(urlManager.getInitialUrl())){
+            youtubeWebView.goBack();
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setMessage(R.string.confirm_exit);
+
+            alertDialog.setPositiveButton(R.string.quit, (dialog, which) -> super.onBackPressed());
+            alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
+
+            alertDialog.create().show();
         }
     }
 
@@ -125,4 +136,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

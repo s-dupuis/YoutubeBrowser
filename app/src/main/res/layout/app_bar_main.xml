@@ -28,6 +28,7 @@
         android:layout_height="45dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
+        android:visibility="invisible"
         app:srcCompat="@drawable/baseline_music_note_white_24"
         app:fabCustomSize="45dp"/>
 
@@ -37,6 +38,7 @@
         android:layout_height="45dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
+        android:visibility="invisible"
         app:srcCompat="@drawable/baseline_movie_white_24"
         app:fabCustomSize="45dp"/>
 
@@ -46,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
         app:srcCompat="@drawable/baseline_get_app_white_24" />
 
 </android.support.design.widget.CoordinatorLayout>
