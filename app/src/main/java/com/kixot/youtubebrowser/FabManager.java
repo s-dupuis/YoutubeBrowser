@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class FabManager {
@@ -42,7 +43,10 @@ public class FabManager {
                 alertDialog.setView(dialogView);
 
                 ImageView thumbnailImageView = (ImageView) dialogView.findViewById(R.id.thumbnailImageView);
+                EditText titleEditText = (EditText) dialogView.findViewById(R.id.titleEditText);
+
                 youtubeManager.downloadThumbnail(thumbnailImageView);
+                youtubeManager.getVideoDatas(titleEditText);
 
                 alertDialog.create().show();
             }

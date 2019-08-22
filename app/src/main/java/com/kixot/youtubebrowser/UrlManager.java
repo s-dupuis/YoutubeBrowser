@@ -46,9 +46,11 @@ public class UrlManager {
 
     public String getThumbnailUrl () {
         String videoId = getVideoId();
-        String thumbnailUrl = YoutubeManager.thumbnailUrl.replace("[videoId]", videoId);
-        Log.d("thumbnailUrl", videoId + "  " + thumbnailUrl);
-        return thumbnailUrl;
+        return YoutubeManager.thumbnailUrl.replace("[videoId]", videoId);
+    }
+
+    public String replaceVideoId (String url) {
+        return url.replace("[videoId]", getVideoId());
     }
 
 }
