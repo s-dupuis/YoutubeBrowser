@@ -3,3 +3,4 @@
 • gestion du retour en arrière dans l'historique
 • enregistrer la miniature comme image d'album (mp3)
 • glisser vers le bas pour reload
+• filtrer les caractères spéciaux + emojis dans les titres
