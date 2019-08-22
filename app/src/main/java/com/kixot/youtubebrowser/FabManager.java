@@ -1,12 +1,14 @@
 package com.kixot.youtubebrowser;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.kixot.youtubebrowser.utils.Permissions;
 
 public class FabManager {
 
@@ -16,10 +18,10 @@ public class FabManager {
     private FloatingActionButton downloadFab, downloadMusicFab, downloadVideoFab;
     private boolean isDownloadFabOpen = false;
 
-    public FabManager (MainActivity activity, UrlManager urlManager, YoutubeManager youtubeManager) {
+    public FabManager (MainActivity activity, UrlManager urlManager) {
         this.activity = activity;
         this.urlManager = urlManager;
-        this.youtubeManager = youtubeManager;
+        this.youtubeManager = new YoutubeManager(urlManager);
     }
 
     public void loadDownloadFabs() {
@@ -27,37 +29,34 @@ public class FabManager {
         downloadMusicFab = (FloatingActionButton) activity.findViewById(R.id.downloadMusicFab);
         downloadVideoFab = (FloatingActionButton) activity.findViewById(R.id.downloadVideoFab);
 
-        downloadFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isDownloadFabOpen) closeFABMenu();
-                else showFABMenu();
-            }
+        downloadFab.setOnClickListener(view -> {
+            if (isDownloadFabOpen) closeFABMenu();
+            else showFABMenu();
         });
 
-        downloadMusicFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-                View dialogView = activity.getLayoutInflater().inflate(R.layout.download_alertdialog, null);
-                alertDialog.setView(dialogView);
+        downloadMusicFab.setOnClickListener(view -> {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
+            View dialogView = activity.getLayoutInflater().inflate(R.layout.download_alertdialog, null);
+            alertDialog.setView(dialogView);
+            alertDialog.setCancelable(false);
 
-                ImageView thumbnailImageView = (ImageView) dialogView.findViewById(R.id.thumbnailImageView);
-                EditText titleEditText = (EditText) dialogView.findViewById(R.id.titleEditText);
+            ImageView thumbnailImageView = (ImageView) dialogView.findViewById(R.id.thumbnailImageView);
+            EditText titleEditText = (EditText) dialogView.findViewById(R.id.titleEditText);
+            EditText endTimeEditText = (EditText) dialogView.findViewById(R.id.endTimeEditText);
 
-                youtubeManager.downloadThumbnail(thumbnailImageView);
-                youtubeManager.getVideoDatas(titleEditText);
+            youtubeManager.downloadThumbnail(thumbnailImageView);
+            youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
 
-                alertDialog.create().show();
-            }
+            alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
+                if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                    youtubeManager.downloadAudio();
+            });
+
+            alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
+            alertDialog.create().show();
         });
 
-        downloadVideoFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "MP4", Snackbar.LENGTH_LONG).setAction("OK", null).show();
-            }
-        });
+        downloadVideoFab.setOnClickListener(view -> Snackbar.make(view, "MP4", Snackbar.LENGTH_LONG).setAction("OK", null).show());
     }
 
     private void showFABMenu(){

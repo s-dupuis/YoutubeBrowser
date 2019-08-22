@@ -1,6 +1,8 @@
 package com.kixot.youtubebrowser;
 
+import android.Manifest;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,12 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import com.kixot.youtubebrowser.utils.Permissions;
+
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private WebView youtubeWebView;
     private UrlManager urlManager;
     private FabManager fabManager;
-    private YoutubeManager youtubeManager;
+
+    public final static String downloadPath = Environment.getExternalStorageDirectory()+ File.separator+"/YoutubeBrowser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +33,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        requestPermissions(new String[]{
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        });
+
         urlManager = new UrlManager(YoutubeManager.url);
-        youtubeManager = new YoutubeManager(urlManager);
-        fabManager = new FabManager(this, urlManager, youtubeManager);
+        fabManager = new FabManager(this, urlManager);
 
         fabManager.loadDownloadFabs();
 
@@ -42,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         loadYoutubeWebView();
 
+    }
+
+    private void requestPermissions (String[] permissions) {
+        for (String permission : permissions) Permissions.requestPermission(this, permission);
     }
 
     private void loadYoutubeWebView()  {
