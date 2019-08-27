@@ -28,13 +28,13 @@ public class DownloadsActivity extends AppCompatActivity {
         ListView downloadsListView = (ListView) findViewById(R.id.downloadsListView);
 
         ArrayList<Download> downloads = new ArrayList<>();
-        downloads.add(new Download("Crossfaith - Xenoooooooooooooooooooooooooo", 33, "audio"));
-        downloads.add(new Download("Crossfaith - System X", 42, "audio"));
-        downloads.add(new Download("Crossfaith - Anger", 25, "video"));
-        downloads.add(new Download("Crossfaith - Calm The Storm", 75, "audio"));
-        downloads.add(new Download("Crossfaith - Tears Fall", 87, "audio"));
-        downloads.add(new Download("Crossfaith - Wildfire", 100, "video"));
-        downloads.add(new Download("Crossfaith - Vermillion", 0, "audio"));
+        downloads.add(new Download(1, "Crossfaith - Xenoooooooooooooooooooooooooo", 33, "audio"));
+        downloads.add(new Download(2, "Crossfaith - System X", 42, "audio"));
+        downloads.add(new Download(3, "Crossfaith - Anger", 25, "video"));
+        downloads.add(new Download(4,"Crossfaith - Calm The Storm", 75, "audio"));
+        downloads.add(new Download(5,"Crossfaith - Tears Fall", 87, "audio"));
+        downloads.add(new Download(6,"Crossfaith - Wildfire", 100, "video"));
+        downloads.add(new Download(7,"Crossfaith - Vermillion", 0, "audio"));
 
         downloadsListView.setAdapter(new DownloadListViewAdapter(this, downloads));
 

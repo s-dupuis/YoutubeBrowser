@@ -40,7 +40,7 @@ public class DownloadListViewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return downloads.get(position).getId();
     }
 
     @Override
@@ -67,6 +67,7 @@ public class DownloadListViewAdapter extends BaseAdapter {
         viewHolder.titleDownloadTextView.setText(Format.formatLongTitle(download.getTitle(), convertView.getResources().getInteger(R.integer.title_max_length)));
         viewHolder.downloadProgressTextView.setText(download.getProgress() + "%");
         viewHolder.downloadProgressBar.setProgress(download.getProgress());
+        viewHolder.downloadImageView.setImageResource(download.getType().equals("audio") ? R.drawable.baseline_music_note_black_24 : R.drawable.baseline_movie_black_24);
 
         convertView.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), download.getTitle(), Toast.LENGTH_SHORT).show();
