@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gridLayout"
+    android:layout_width="match_parent"
+    android:layout_height="70dp">
+
+    <!--<ImageView
+        android:id="@+id/downloadImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/baseline_get_app_black_24"
+        app:layout_constraintBottom_toTopOf="@+id/downloadProgressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/titleDownloadTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="15dp"
+        android:maxLength="40"
+        android:text="Crossfaith - Xenooooooooooooooooooooooooooooooo"
+        app:layout_constraintBottom_toTopOf="@+id/downloadProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/downloadProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:progress="50"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        app:layout_constraintEnd_toEndOf="@id/downloadProgressTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleDownloadTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:id="@+id/downloadProgressTextView"
+        app:layout_constraintTop_toBottomOf="@id/downloadProgressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />-->
+
+    <ImageView
+        android:id="@+id/downloadImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/baseline_get_app_black_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/titleDownloadTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginTop="10dp"
+        android:maxLength="@integer/title_max_length"
+        app:layout_constraintBottom_toTopOf="@+id/downloadProgressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/downloadProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:paddingStart="50dp"
+        android:paddingEnd="30dp"
+        app:layout_constraintEnd_toEndOf="@id/downloadProgressTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleDownloadTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:id="@+id/downloadProgressTextView"
+        app:layout_constraintTop_toBottomOf="@id/downloadProgressBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!--<Button
+        android:layout_width="wrap_content"
+        android:layout_height="30sp"
+        android:textSize="10sp"
+        android:id="@+id/downloadProgressButton"
+        android:text="Annuler"
+        app:layout_constraintTop_toTopOf="@id/downloadProgressBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>-->
+
+</android.support.constraint.ConstraintLayout>

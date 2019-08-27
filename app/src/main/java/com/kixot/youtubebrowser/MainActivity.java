@@ -1,6 +1,7 @@
 package com.kixot.youtubebrowser;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import com.kixot.youtubebrowser.activities.DownloadsActivity;
 import com.kixot.youtubebrowser.utils.Permissions;
 
 import java.io.File;
@@ -118,18 +120,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_downloads) {
+            Intent intent = new Intent(MainActivity.this, DownloadsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -11,4 +11,12 @@ public class Format {
         return formatTimeUnit(seconds/3600) + ":" + formatTimeUnit((seconds%3600)/60) + ":" + formatTimeUnit(seconds%3600%60);
     }
 
+    public static String formatLongTitle (String title, int maxLength) {
+        if (title.length() <= maxLength) return title;
+        else {
+            String formattedTitle = title.substring(0, maxLength-1);
+            return formattedTitle + "…";
+        }
+    }
+
 }

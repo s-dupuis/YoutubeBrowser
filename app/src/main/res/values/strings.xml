@@ -16,4 +16,6 @@
     <string name="cancel">Annuler</string>
     <string name="confirm_exit">Êtes-vous sûr de vouloir quitter ?</string>
     <string name="quit">Quitter</string>
+    <string name="downloads">Téléchargements</string>
+
 </resources>

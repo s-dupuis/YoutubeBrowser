@@ -1,7 +1,6 @@
 package com.kixot.youtubebrowser.asyncTasks;
 
 import android.os.AsyncTask;
-import android.provider.MediaStore;
 import android.util.Log;
 
 import com.github.kiulian.downloader.YoutubeDownloader;
@@ -22,29 +21,29 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
             File outputDir = new File(MainActivity.downloadPath+"/musics");
 
             List<AudioFormat> audios = video.findAudioWithQuality(AudioQuality.high);
-            AudioQuality[] audioQualities = new AudioQuality[] { AudioQuality.high, AudioQuality.medium, AudioQuality.low };
+            AudioQuality[] audioQualities = new AudioQuality[] { AudioQuality.high, AudioQuality.medium, AudioQuality.low, AudioQuality.unknown };
 
             int i = 0;
             while (audios.size() == 0 && audioQualities.length != i) {
                 audios = video.findAudioWithQuality(audioQualities[i++]);
-                Log.d("DownloadVid - length", audios.size()+"");
+                Log.d("DownloadAudio - length", audios.size()+"");
             }
 
             if (audios.size() > 0) {
                 video.downloadAsync(audios.get(0), outputDir, new YoutubeDownloader.DownloadCallback() {
                     @Override
                     public void onDownloading(int progress) {
-                        Log.d("DownloadVid - onDl", progress+"");
+                        Log.d("DownloadAudio - onDl", progress + ""); //TODO
                     }
 
                     @Override
                     public void onFinished(File file) {
-                        Log.d("DownloadVid - onFinish", file.getAbsolutePath());
+                        Log.d("DownloadAud - onFinish", file.getAbsolutePath()); //TODO
                     }
 
                     @Override
                     public void onError(Throwable throwable) {
-                        Log.d("DownloadVid - onErr", throwable.getMessage());
+                        Log.d("DownloadAudio - onErr", throwable.getMessage()); //TODO
                     }
                 });
             }
