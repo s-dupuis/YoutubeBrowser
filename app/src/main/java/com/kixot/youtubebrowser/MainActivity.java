@@ -72,6 +72,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         youtubeWebView.loadUrl(YoutubeManager.url);
     }
 
+    private void exitApp(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setMessage(R.string.confirm_exit);
+
+        alertDialog.setPositiveButton(R.string.quit, (dialog, which) -> super.onBackPressed());
+        alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
+
+        alertDialog.create().show();
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -81,13 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (!urlManager.getCurrentUrl().equals(urlManager.getInitialUrl())){
             youtubeWebView.goBack();
         } else {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-            alertDialog.setMessage(R.string.confirm_exit);
-
-            alertDialog.setPositiveButton(R.string.quit, (dialog, which) -> super.onBackPressed());
-            alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
-
-            alertDialog.create().show();
+            exitApp();
         }
     }
 
@@ -116,13 +120,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_downloads) {
-            Intent intent = new Intent(MainActivity.this, DownloadsActivity.class);
-            startActivity(intent);
+        switch(id) {
+            case R.id.nav_downloads:
+                Intent intent = new Intent(MainActivity.this, DownloadsActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.nav_poweroff:
+                exitApp();
+                break;
+            case R.id.nav_about:
+                break;
+            case R.id.nav_settings:
+                break;
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

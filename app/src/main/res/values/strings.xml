@@ -17,5 +17,7 @@
     <string name="confirm_exit">Êtes-vous sûr de vouloir quitter ?</string>
     <string name="quit">Quitter</string>
     <string name="downloads">Téléchargements</string>
-
+    <string name="nav_poweroff">Quitter l\'application</string>
+    <string name="nav_settings">Paramètres</string>
+    <string name="nav_about">À propos</string>
 </resources>
