@@ -52,13 +52,13 @@ public class FabManager {
             youtubeManager.downloadThumbnail(thumbnailImageView);
             youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
 
-            long downloadId = downloadsTable.insertDownload(new Download(
-                    titleEditText.getText().toString(),
-                    0,
-                    "audio"
-            ));
-
             alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
+                long downloadId = downloadsTable.insertDownload(new Download(
+                        titleEditText.getText().toString(),
+                        0,
+                        "audio"
+                ));
+
                 if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
                     youtubeManager.downloadAudio(downloadId, downloadsTable);
             });

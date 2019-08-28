@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.kixot.youtubebrowser.bdd.BaseYoutubeBrowser;
 import com.kixot.youtubebrowser.models.Download;
@@ -36,7 +37,6 @@ public class DownloadsTable {
     public long insertDownload(Download download) {
         ContentValues values = new ContentValues();
 
-        values.put(FIELD_ID, download.getId());
         values.put(FIELD_TITLE, download.getTitle());
         values.put(FIELD_PROGRESS, download.getProgress());
         values.put(FIELD_TYPE, download.getType());
@@ -57,7 +57,6 @@ public class DownloadsTable {
     }
 
     public boolean deleteDownlaod(long id) {
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + FIELD_ID + " = ?;";
         return bdd.delete(TABLE_NAME, FIELD_ID + " = ?;", new String[]{ id+"" }) > 0;
     }
 
@@ -100,14 +99,12 @@ public class DownloadsTable {
         c.moveToFirst();
 
         do{
-            downloads.add(
-                    new Download(
+            downloads.add(new Download(
                     c.getLong(FIELD_ID_INDEX),
                     c.getString(FIELD_TITLE_INDEX),
                     c.getInt(FIELD_PROGRESS_INDEX),
                     c.getString(FIELD_TYPE_INDEX)
-            )
-            );
+            ));
         }while(c.moveToNext());
 
         c.close();
