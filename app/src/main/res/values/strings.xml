@@ -2,10 +2,6 @@
     <string name="app_name">Youtube Browser</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="cut_times">Découpage de la vidéo :</string>
     <string name="thumbnail">Miniature</string>
@@ -20,4 +16,6 @@
     <string name="nav_poweroff">Quitter l\'application</string>
     <string name="nav_settings">Paramètres</string>
     <string name="nav_about">À propos</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

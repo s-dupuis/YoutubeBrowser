@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import com.kixot.youtubebrowser.activities.DownloadsActivity;
+import com.kixot.youtubebrowser.activities.SettingsActivity;
 import com.kixot.youtubebrowser.utils.Permissions;
 
 import java.io.File;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        android.support.v7.preference.PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         loadYoutubeWebView();
 
@@ -117,14 +120,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        Intent intent;
+
         switch(id) {
             case R.id.nav_downloads:
-                Intent intent = new Intent(MainActivity.this, DownloadsActivity.class);
+                intent = new Intent(MainActivity.this, DownloadsActivity.class);
                 startActivity(intent);
                 break;
             case R.id.nav_poweroff:
@@ -133,6 +137,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_about:
                 break;
             case R.id.nav_settings:
+                intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
                 break;
         }
 

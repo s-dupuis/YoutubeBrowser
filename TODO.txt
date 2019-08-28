@@ -1,6 +1,15 @@
 • lien youtube en préférence
 • modifier la sortie audio
-• gestion du retour en arrière dans l'historique
 • enregistrer la miniature comme image d'album (mp3)
 • glisser vers le bas pour reload
 • filtrer les caractères spéciaux dans les titres
+• autoriser connexion youtube
+• bouton home (page accueil youtube) & actualiser
+
+Téléchargements :
+• notification quand téléchargement fini
+• téléchargement vidéos
+• ajouter statut téléchargement (downloading, finished, stopped)
+• au démarrage de l'appli mettre downloading -> stopped
+• nettoyer la liste des téléchargements (retirer stopped et finished)
+• couleur progressbar en fonction du statut

@@ -1,6 +1,5 @@
 package com.kixot.youtubebrowser;
 
-import android.util.Log;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;

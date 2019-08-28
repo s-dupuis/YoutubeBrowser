@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Youtube">
+
+        <EditTextPreference
+            android:key="youtube_url"
+            android:title="Adresse Youtube"
+            android:summary="https://m.youtube.com/"
+            android:defaultValue="https://m.youtube.com/"
+            android:icon="@drawable/baseline_router_black_24"/>
+
+        <SwitchPreference
+            android:key="computer_mode"
+            android:title="Affichage ordinateur"
+            android:icon="@drawable/baseline_desktop_windows_black_24"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Téléchargements">
+
+        <EditTextPreference
+            android:key="downloads_path"
+            android:title="Emplacement des téléchargements"
+            android:summary="/"
+            android:defaultValue="/"
+            android:icon="@drawable/baseline_folder_open_black_24"/>
+
+        <CheckBoxPreference
+            android:key="wifi_download"
+            android:title="Télécharger uniquement en WIFI"
+            android:summary="Désactive le téléchargement lorsque le réseau mobile est actif"
+            android:defaultValue="true"
+            android:icon="@drawable/baseline_signal_wifi_4_bar_lock_black_24"/>
+
+        <CheckBoxPreference
+            android:key="display_download_warning"
+            android:title="Afficher un avertissement"
+            android:summary="Affiche un avertissement quand le fichier à télécharger est volumineux"
+            android:defaultValue="false"
+            android:icon="@drawable/baseline_warning_black_24"/>
+
+        <EditTextPreference
+            android:key="download_warning_value"
+            android:title="Taille minimum pour l'avertissement"
+            android:summary="L'avertissement s'affiche si la taille du fichier est supérieure à cette valeur"
+            android:defaultValue="200Mo"
+            android:icon="@drawable/baseline_sd_storage_black_24"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
