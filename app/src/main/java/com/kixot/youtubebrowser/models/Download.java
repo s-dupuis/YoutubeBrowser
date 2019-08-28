@@ -1,8 +1,9 @@
 package com.kixot.youtubebrowser.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Download {
+public class Download implements Serializable{
 
     private long id;
     private String title;

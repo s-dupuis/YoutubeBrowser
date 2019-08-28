@@ -1,5 +1,6 @@
 package com.kixot.youtubebrowser.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,19 +13,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kixot.youtubebrowser.R;
+import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 import com.kixot.youtubebrowser.models.Download;
 import com.kixot.youtubebrowser.utils.Format;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DownloadListViewAdapter extends BaseAdapter {
 
     private ArrayList<Download> downloads;
     private final LayoutInflater inflat;
+    private DownloadsTable downloadsTable;
+    private Activity activity;
 
-    public DownloadListViewAdapter(Context c, ArrayList<Download> downloads) {
-        this.inflat = LayoutInflater.from(c);
+    public DownloadListViewAdapter(Activity activity, ArrayList<Download> downloads, DownloadsTable downloadsTable) {
+        this.activity = activity;
+        this.inflat = LayoutInflater.from(activity);
         this.downloads = downloads;
+        this.downloadsTable = downloadsTable;
     }
 
 
@@ -76,6 +84,20 @@ public class DownloadListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private void updateProgress(long downloadId, TextView textView, ProgressBar progressBar){
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                Download download = downloadsTable.getDownload(downloadId);
+                textView.setText(download.getProgress()+"%");
+                progressBar.setProgress(download.getProgress());
+            }
+
+        },0,1000);
+    }
+
     static class ViewHolder{
         TextView titleDownloadTextView;
         TextView downloadProgressTextView;
@@ -84,16 +106,4 @@ public class DownloadListViewAdapter extends BaseAdapter {
         //Button downloadProgressButton;
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
-    }
-
-    public void notifyItemChanged(int position) {
-
-    }
-
-    public void notifyItemInserted(int position) {
-
-    }
 }
