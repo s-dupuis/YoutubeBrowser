@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import com.kixot.youtubebrowser.asyncTasks.DownloadThumbnailTask;
 import com.kixot.youtubebrowser.asyncTasks.DownloadAudioTask;
 import com.kixot.youtubebrowser.asyncTasks.GetVideoDetailsTask;
+import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 
 public class YoutubeManager {
 
@@ -28,8 +29,8 @@ public class YoutubeManager {
         task.execute(urlManager.getVideoId());
     }
 
-    public void downloadAudio () {
-        DownloadAudioTask task = new DownloadAudioTask();
+    public void downloadAudio (long downloadId, DownloadsTable downloadsTable) {
+        DownloadAudioTask task = new DownloadAudioTask(downloadId, downloadsTable);
         task.execute(urlManager.getVideoId());
     }
 

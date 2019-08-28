@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
+import com.kixot.youtubebrowser.models.Download;
 import com.kixot.youtubebrowser.utils.Permissions;
 
 public class FabManager {
@@ -17,11 +19,14 @@ public class FabManager {
     private YoutubeManager youtubeManager;
     private FloatingActionButton downloadFab, downloadMusicFab, downloadVideoFab;
     private boolean isDownloadFabOpen = false;
+    private DownloadsTable downloadsTable;
 
     public FabManager (MainActivity activity, UrlManager urlManager) {
         this.activity = activity;
         this.urlManager = urlManager;
         this.youtubeManager = new YoutubeManager(urlManager);
+        this.downloadsTable = new DownloadsTable(activity);
+        downloadsTable.open();
     }
 
     public void loadDownloadFabs() {
@@ -47,9 +52,15 @@ public class FabManager {
             youtubeManager.downloadThumbnail(thumbnailImageView);
             youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
 
+            long downloadId = downloadsTable.insertDownload(new Download(
+                    titleEditText.getText().toString(),
+                    0,
+                    "audio"
+            ));
+
             alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
                 if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                    youtubeManager.downloadAudio();
+                    youtubeManager.downloadAudio(downloadId, downloadsTable);
             });
 
             alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});

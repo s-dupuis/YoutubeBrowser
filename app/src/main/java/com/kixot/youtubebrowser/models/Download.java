@@ -1,24 +1,34 @@
 package com.kixot.youtubebrowser.models;
 
+import java.io.Serializable;
+
 public class Download {
 
-    private int id;
+    private long id;
     private String title;
     private int progress;
     private String type;
 
-    public Download(int id, String title, int progress, String type) {
+    public Download() {}
+
+    public Download(String title, int progress, String type) {
+        this.title = title;
+        this.progress = progress;
+        this.type = type;
+    }
+
+    public Download(long id, String title, int progress, String type) {
         this.id = id;
         this.title = title;
         this.progress = progress;
         this.type = type;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

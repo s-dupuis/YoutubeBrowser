@@ -8,11 +8,14 @@ import android.widget.ListView;
 
 import com.kixot.youtubebrowser.R;
 import com.kixot.youtubebrowser.adapters.DownloadListViewAdapter;
+import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 import com.kixot.youtubebrowser.models.Download;
 
 import java.util.ArrayList;
 
 public class DownloadsActivity extends AppCompatActivity {
+
+    private DownloadsTable downloadsTable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,23 +24,17 @@ public class DownloadsActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        downloadsTable = new DownloadsTable(this);
+        downloadsTable.open();
+
         loadDownloadsList();
     }
 
     private void loadDownloadsList () {
         ListView downloadsListView = (ListView) findViewById(R.id.downloadsListView);
 
-        ArrayList<Download> downloads = new ArrayList<>();
-        downloads.add(new Download(1, "Crossfaith - Xenoooooooooooooooooooooooooo", 33, "audio"));
-        downloads.add(new Download(2, "Crossfaith - System X", 42, "audio"));
-        downloads.add(new Download(3, "Crossfaith - Anger", 25, "video"));
-        downloads.add(new Download(4,"Crossfaith - Calm The Storm", 75, "audio"));
-        downloads.add(new Download(5,"Crossfaith - Tears Fall", 87, "audio"));
-        downloads.add(new Download(6,"Crossfaith - Wildfire", 100, "video"));
-        downloads.add(new Download(7,"Crossfaith - Vermillion", 0, "audio"));
-
+        ArrayList<Download> downloads = downloadsTable.getDownloads();
         downloadsListView.setAdapter(new DownloadListViewAdapter(this, downloads));
-
     }
 
     @Override

@@ -8,11 +8,21 @@ import com.github.kiulian.downloader.model.YoutubeVideo;
 import com.github.kiulian.downloader.model.formats.AudioFormat;
 import com.github.kiulian.downloader.model.quality.AudioQuality;
 import com.kixot.youtubebrowser.MainActivity;
+import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 
 import java.io.File;
 import java.util.List;
 
 public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
+
+    private long downloadId;
+    private DownloadsTable downloadsTable;
+
+    public DownloadAudioTask (long downloadId, DownloadsTable downloadsTable) {
+        this.downloadId = downloadId;
+        this.downloadsTable = downloadsTable;
+    }
+
     @Override
     protected Void doInBackground(String... videoIds) {
 
@@ -33,7 +43,8 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
                 video.downloadAsync(audios.get(0), outputDir, new YoutubeDownloader.DownloadCallback() {
                     @Override
                     public void onDownloading(int progress) {
-                        Log.d("DownloadAudio - onDl", progress + ""); //TODO
+                        downloadsTable.updateProgress(downloadId, progress);
+                        Log.d("DownloadAudio - onDl", progress+""); //TODO
                     }
 
                     @Override

@@ -83,4 +83,17 @@ public class DownloadListViewAdapter extends BaseAdapter {
         ImageView downloadImageView;
         //Button downloadProgressButton;
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+    public void notifyItemChanged(int position) {
+
+    }
+
+    public void notifyItemInserted(int position) {
+
+    }
 }

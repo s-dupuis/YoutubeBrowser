@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +17,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import com.kixot.youtubebrowser.activities.DownloadsActivity;
+import com.kixot.youtubebrowser.bdd.BaseYoutubeBrowser;
 import com.kixot.youtubebrowser.utils.Permissions;
 
 import java.io.File;
@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private WebView youtubeWebView;
     private UrlManager urlManager;
     private FabManager fabManager;
+
+    private BaseYoutubeBrowser baseYoutubeBrowser;
 
     public final static String downloadPath = Environment.getExternalStorageDirectory()+ File.separator+"/YoutubeBrowser";
 
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         loadYoutubeWebView();
+
+        baseYoutubeBrowser = new BaseYoutubeBrowser(this);
 
     }
 
