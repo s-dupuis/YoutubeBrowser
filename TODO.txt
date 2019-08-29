@@ -9,7 +9,4 @@
 Téléchargements :
 • notification quand téléchargement fini
 • téléchargement vidéos
-• ajouter statut téléchargement (downloading, finished, stopped)
-• au démarrage de l'appli mettre downloading -> stopped
-• nettoyer la liste des téléchargements (retirer stopped et finished)
-• couleur progressbar en fonction du statut
+• nettoyer la liste des téléchargements (retirer error canceled et finished)

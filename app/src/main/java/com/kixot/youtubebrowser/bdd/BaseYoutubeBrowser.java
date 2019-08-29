@@ -17,7 +17,8 @@ public class BaseYoutubeBrowser extends SQLiteOpenHelper{
                     "idDownload INTEGER PRIMARY KEY AUTOINCREMENT,"+
                     "title VARCHAR(255),"+
                     "progress INTEGER,"+
-                    "type VARCHAR(50));";
+                    "type VARCHAR(50)," +
+                    "status VARCHAR(50));";
 
     public BaseYoutubeBrowser(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

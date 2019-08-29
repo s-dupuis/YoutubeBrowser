@@ -1,6 +1,8 @@
 package com.kixot.youtubebrowser.adapters;
 
 import android.app.Activity;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +26,8 @@ public class DownloadListViewAdapter extends BaseAdapter {
     private ArrayList<Download> downloads;
     private final LayoutInflater inflat;
     private DownloadsTable downloadsTable;
-    private Activity activity;
 
     public DownloadListViewAdapter(Activity activity, ArrayList<Download> downloads, DownloadsTable downloadsTable) {
-        this.activity = activity;
         this.inflat = LayoutInflater.from(activity);
         this.downloads = downloads;
         this.downloadsTable = downloadsTable;
@@ -70,30 +70,37 @@ public class DownloadListViewAdapter extends BaseAdapter {
 
         Download download = downloads.get(position);
 
+        int color = Color.BLUE;
+        String progressText = "0%";
+
+        switch (download.getStatus()) {
+            case "downloading":
+                progressText = download.getProgress() + "%";
+                color = Color.CYAN;
+                break;
+            case "error":
+                progressText = "Une erreur est survenue.";
+                color = Color.RED;
+                break;
+            case "canceled":
+                progressText = "Téléchargement annulé.";
+                color = Color.GRAY;
+                break;
+            case "finished":
+                progressText = "Téléchargement terminé.";
+                color = Color.GREEN;
+                break;
+        }
+
         viewHolder.titleDownloadTextView.setText(Format.formatLongTitle(download.getTitle(), convertView.getResources().getInteger(R.integer.title_max_length)));
-        viewHolder.downloadProgressTextView.setText(download.getProgress() + "%");
         viewHolder.downloadProgressBar.setProgress(download.getProgress());
         viewHolder.downloadImageView.setImageResource(download.getType().equals("audio") ? R.drawable.baseline_music_note_black_24 : R.drawable.baseline_movie_black_24);
+        viewHolder.downloadProgressTextView.setText(progressText);
+        viewHolder.downloadProgressBar.setProgressTintList(ColorStateList.valueOf(color));
 
-        convertView.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), download.getTitle(), Toast.LENGTH_SHORT).show();
-        });
+        convertView.setOnClickListener(v -> Toast.makeText(v.getContext(), download.getTitle(), Toast.LENGTH_SHORT).show());
 
         return convertView;
-    }
-
-    private void updateProgress(long downloadId, TextView textView, ProgressBar progressBar){
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                Download download = downloadsTable.getDownload(downloadId);
-                textView.setText(download.getProgress()+"%");
-                progressBar.setProgress(download.getProgress());
-            }
-
-        },0,1000);
     }
 
     static class ViewHolder{

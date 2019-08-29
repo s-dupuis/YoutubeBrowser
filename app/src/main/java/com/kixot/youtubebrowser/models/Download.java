@@ -8,6 +8,7 @@ public class Download implements Serializable{
     private String title;
     private int progress;
     private String type;
+    private String status;
 
     public Download() {}
 
@@ -15,13 +16,15 @@ public class Download implements Serializable{
         this.title = title;
         this.progress = progress;
         this.type = type;
+        this.status = "downloading";
     }
 
-    public Download(long id, String title, int progress, String type) {
+    public Download(long id, String title, int progress, String type, String status) {
         this.id = id;
         this.title = title;
         this.progress = progress;
         this.type = type;
+        this.status = status;
     }
 
     public long getId() {
@@ -54,5 +57,13 @@ public class Download implements Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

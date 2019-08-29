@@ -36,7 +36,6 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
             int i = 0;
             while (audios.size() == 0 && audioQualities.length != i) {
                 audios = video.findAudioWithQuality(audioQualities[i++]);
-                Log.d("DownloadAudio - length", audios.size()+"");
             }
 
             if (audios.size() > 0) {
@@ -44,23 +43,24 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
                     @Override
                     public void onDownloading(int progress) {
                         downloadsTable.updateProgress(downloadId, progress);
-                        Log.d("DownloadAudio - onDl", progress+""); //TODO
                     }
 
                     @Override
                     public void onFinished(File file) {
-                        Log.d("DownloadAud - onFinish", file.getAbsolutePath()); //TODO
+                        downloadsTable.updateStatus(downloadId, "finished");
                     }
 
                     @Override
                     public void onError(Throwable throwable) {
-                        Log.d("DownloadAudio - onErr", throwable.getMessage()); //TODO
+                        downloadsTable.updateStatus(downloadId, "error");
+                        Log.d("DownloadAudio - onErr", throwable.getMessage());
                     }
                 });
             }
 
         } catch (Exception e) {
-            Log.d("DownloadVid - catch", e.getMessage());
+            downloadsTable.updateStatus(downloadId, "error");
+            Log.d("DownloadAudio - catch", e.getMessage());
             e.printStackTrace();
         }
 

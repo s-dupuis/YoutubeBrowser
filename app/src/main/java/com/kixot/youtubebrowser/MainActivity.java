@@ -19,6 +19,7 @@ import android.webkit.WebView;
 import com.kixot.youtubebrowser.activities.AboutActivity;
 import com.kixot.youtubebrowser.activities.DownloadsActivity;
 import com.kixot.youtubebrowser.activities.SettingsActivity;
+import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 import com.kixot.youtubebrowser.utils.Permissions;
 
 import java.io.File;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private WebView youtubeWebView;
     private UrlManager urlManager;
     private FabManager fabManager;
+
+    private DownloadsTable downloadsTable;
 
     public final static String downloadPath = Environment.getExternalStorageDirectory()+ File.separator+"/YoutubeBrowser";
 
@@ -47,6 +50,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fabManager = new FabManager(this, urlManager);
 
         fabManager.loadDownloadFabs();
+        loadYoutubeWebView();
+
+        downloadsTable = new DownloadsTable(this);
+        downloadsTable.open();
+        downloadsTable.cancelDownloads();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -57,8 +65,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         android.support.v7.preference.PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-
-        loadYoutubeWebView();
 
     }
 

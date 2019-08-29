@@ -24,6 +24,8 @@ public class DownloadsTable {
     private final int FIELD_PROGRESS_INDEX = 2;
     private final String FIELD_TYPE = "type";
     private final int FIELD_TYPE_INDEX = 3;
+    private final String FIELD_STATUS = "status";
+    private final int FIELD_STATUS_INDEX = 4;
 
     public DownloadsTable(Context c) {
         baseYoutubeBrowser = new BaseYoutubeBrowser(c);
@@ -39,6 +41,7 @@ public class DownloadsTable {
         values.put(FIELD_TITLE, download.getTitle());
         values.put(FIELD_PROGRESS, download.getProgress());
         values.put(FIELD_TYPE, download.getType());
+        values.put(FIELD_STATUS, download.getStatus());
 
         return bdd.insert(TABLE_NAME, null, values);
     }
@@ -55,7 +58,7 @@ public class DownloadsTable {
         return cursorToListDownload(c);
     }
 
-    public boolean deleteDownlaod(long id) {
+    public boolean deleteDownload(long id) {
         return bdd.delete(TABLE_NAME, FIELD_ID + " = ?;", new String[]{ id+"" }) > 0;
     }
 
@@ -65,6 +68,18 @@ public class DownloadsTable {
         values.put(FIELD_PROGRESS, progress);
 
         return bdd.update(TABLE_NAME, values, FIELD_ID + "=?;", new String[]{ id+"" }) > 0;
+    }
+
+    public boolean updateStatus(long id, String status){
+        ContentValues values = new ContentValues();
+        values.put(FIELD_STATUS, status);
+        return bdd.update(TABLE_NAME, values, FIELD_ID+"=?;", new String[]{id+""}) > 0;
+    }
+
+    public void cancelDownloads(){
+        ContentValues values = new ContentValues();
+        values.put(FIELD_STATUS, "canceled");
+        bdd.update(TABLE_NAME, values, FIELD_STATUS+"=?;", new String[]{"downloading"});
     }
 
     private Download cursorToDownload(Cursor c) {
@@ -79,7 +94,8 @@ public class DownloadsTable {
                 c.getLong(FIELD_ID_INDEX),
                 c.getString(FIELD_TITLE_INDEX),
                 c.getInt(FIELD_PROGRESS_INDEX),
-                c.getString(FIELD_TYPE_INDEX)
+                c.getString(FIELD_TYPE_INDEX),
+                c.getString(FIELD_STATUS_INDEX)
         );
 
         c.close();
@@ -102,7 +118,8 @@ public class DownloadsTable {
                     c.getLong(FIELD_ID_INDEX),
                     c.getString(FIELD_TITLE_INDEX),
                     c.getInt(FIELD_PROGRESS_INDEX),
-                    c.getString(FIELD_TYPE_INDEX)
+                    c.getString(FIELD_TYPE_INDEX),
+                    c.getString(FIELD_STATUS_INDEX)
             ));
         }while(c.moveToNext());
 
