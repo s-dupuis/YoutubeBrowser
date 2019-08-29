@@ -16,6 +16,9 @@
     <string name="nav_poweroff">Quitter l\'application</string>
     <string name="nav_settings">Paramètres</string>
     <string name="nav_about">À propos</string>
+    <string name="action_clear">Vider</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

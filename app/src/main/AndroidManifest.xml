@@ -32,7 +32,8 @@
         <activity
             android:name=".activities.DownloadsActivity"
             android:label="@string/downloads"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

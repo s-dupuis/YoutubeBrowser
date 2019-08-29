@@ -2,7 +2,10 @@ package com.kixot.youtubebrowser.activities;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
@@ -22,11 +25,13 @@ public class DownloadsActivity extends AppCompatActivity {
     private ArrayList<Download> downloads;
     private DownloadListViewAdapter downloadListViewAdapter;
     ListView downloadsListView;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_downloads);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         downloadsTable = new DownloadsTable(this);
@@ -67,11 +72,29 @@ public class DownloadsActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.downloads, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
             this.finish();
+            return true;
+        } else if (id == R.id.action_clear) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+            dialog.setCancelable(true);
+            dialog.setMessage("Supprimer les téléchargements terminés ?");
+
+            dialog.setNegativeButton(R.string.no, (dialog1, which) -> { });
+            dialog.setPositiveButton(R.string.yes, (dialog1, which) -> downloadsTable.deleteOldDownloads());
+
+            dialog.create().show();
+
             return true;
         }
 

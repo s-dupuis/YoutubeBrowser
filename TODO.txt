@@ -9,4 +9,3 @@
 Téléchargements :
 • notification quand téléchargement fini
 • téléchargement vidéos
-• nettoyer la liste des téléchargements (retirer error canceled et finished)

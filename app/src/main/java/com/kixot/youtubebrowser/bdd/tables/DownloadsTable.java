@@ -62,6 +62,11 @@ public class DownloadsTable {
         return bdd.delete(TABLE_NAME, FIELD_ID + " = ?;", new String[]{ id+"" }) > 0;
     }
 
+    public void deleteOldDownloads(){
+        String[] status = new String[]{"finished", "canceled", "error"};
+        bdd.delete(TABLE_NAME, FIELD_STATUS+" IN (?,?,?);", status);
+    }
+
     public boolean updateProgress(long id, int progress){
         ContentValues values = new ContentValues();
 
