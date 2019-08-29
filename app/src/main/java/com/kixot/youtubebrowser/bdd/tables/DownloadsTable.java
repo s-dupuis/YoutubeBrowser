@@ -15,6 +15,8 @@ public class DownloadsTable {
     private final BaseYoutubeBrowser baseYoutubeBrowser;
     private SQLiteDatabase bdd;
 
+    private Context context;
+
     private final String TABLE_NAME = "downloads";
     private final String FIELD_ID = "idDownload";
     private final int FIELD_ID_INDEX = 0;
@@ -28,6 +30,7 @@ public class DownloadsTable {
     private final int FIELD_STATUS_INDEX = 4;
 
     public DownloadsTable(Context c) {
+        this.context = c;
         baseYoutubeBrowser = new BaseYoutubeBrowser(c);
     }
 
@@ -135,5 +138,9 @@ public class DownloadsTable {
 
     public void clearTable() {
         bdd.delete(TABLE_NAME, null, null);
+    }
+
+    public Context getContext () {
+        return this.context;
     }
 }

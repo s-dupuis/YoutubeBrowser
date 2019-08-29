@@ -5,7 +5,10 @@
 • filtrer les caractères spéciaux dans les titres
 • autoriser connexion youtube
 • bouton home (page accueil youtube) & actualiser
+• bloquer boutons alertdialog quand les données ne sont pas encore chargées (ou attendre avant d'afficher)
 
 Téléchargements :
-• notification quand téléchargement fini
+• notification quand téléchargement fini // à tester
 • téléchargement vidéos
+• renommer fichier après téléchargement
+• découpage

@@ -1,5 +1,6 @@
 package com.kixot.youtubebrowser;
 
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -29,8 +30,8 @@ public class YoutubeManager {
         task.execute(urlManager.getVideoId());
     }
 
-    public void downloadAudio (long downloadId, DownloadsTable downloadsTable) {
-        DownloadAudioTask task = new DownloadAudioTask(downloadId, downloadsTable);
+    public void downloadAudio (long downloadId, DownloadsTable downloadsTable, View viewSnackbar) {
+        DownloadAudioTask task = new DownloadAudioTask(downloadId, downloadsTable, viewSnackbar);
         task.execute(urlManager.getVideoId());
     }
 

@@ -20,5 +20,8 @@
     <string name="yes">Oui</string>
     <string name="no">Non</string>
 
+    <string name="channel_name">Téléchargements</string>
+    <string name="channel_description">Données relatives aux téléchargements</string>
+
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

@@ -60,7 +60,7 @@ public class FabManager {
                 ));
 
                 if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                    youtubeManager.downloadAudio(downloadId, downloadsTable);
+                    youtubeManager.downloadAudio(downloadId, downloadsTable, activity.findViewById(android.R.id.content));
             });
 
             alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
