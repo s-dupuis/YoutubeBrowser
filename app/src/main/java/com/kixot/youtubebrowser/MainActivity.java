@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import com.kixot.youtubebrowser.activities.AboutActivity;
 import com.kixot.youtubebrowser.activities.DownloadsActivity;
 import com.kixot.youtubebrowser.activities.SettingsActivity;
 import com.kixot.youtubebrowser.utils.Permissions;
@@ -135,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 exitApp();
                 break;
             case R.id.nav_about:
+                intent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_settings:
                 intent = new Intent(MainActivity.this, SettingsActivity.class);
