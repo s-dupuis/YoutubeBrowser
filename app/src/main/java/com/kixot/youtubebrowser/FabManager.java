@@ -2,8 +2,11 @@ package com.kixot.youtubebrowser;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -49,9 +52,6 @@ public class FabManager {
             EditText titleEditText = (EditText) dialogView.findViewById(R.id.titleEditText);
             EditText endTimeEditText = (EditText) dialogView.findViewById(R.id.endTimeEditText);
 
-            youtubeManager.downloadThumbnail(thumbnailImageView);
-            youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
-
             alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
                 long downloadId = downloadsTable.insertDownload(new Download(
                         titleEditText.getText().toString(),
@@ -64,7 +64,29 @@ public class FabManager {
             });
 
             alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
-            alertDialog.create().show();
+
+            AlertDialog createdAlertDialog = alertDialog.create();
+            createdAlertDialog.show();
+
+            createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+            titleEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(titleEditText.getText().toString().length() > 0);
+                }
+            });
+
+            youtubeManager.downloadThumbnail(thumbnailImageView);
+            youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
+
+            createdAlertDialog.show();
         });
 
         downloadVideoFab.setOnClickListener(view -> Snackbar.make(view, "MP4", Snackbar.LENGTH_LONG).setAction("OK", null).show());

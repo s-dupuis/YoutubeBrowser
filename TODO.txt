@@ -2,7 +2,6 @@
 • glisser vers le bas pour reload
 • filtrer les caractères spéciaux dans les titres
 • autoriser connexion compte youtube
-• bloquer boutons alertdialog quand les données ne sont pas encore chargées (ou attendre avant d'afficher)
 
 Téléchargements :
 • téléchargement vidéos
