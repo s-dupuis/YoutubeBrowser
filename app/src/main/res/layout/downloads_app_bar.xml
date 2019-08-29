@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_downloads" />
+    <include layout="@layout/downloads_content" />
 
 </android.support.design.widget.CoordinatorLayout>

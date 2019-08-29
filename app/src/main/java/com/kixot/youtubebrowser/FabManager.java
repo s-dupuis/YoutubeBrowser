@@ -41,7 +41,7 @@ public class FabManager {
 
         downloadMusicFab.setOnClickListener(view -> {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-            View dialogView = activity.getLayoutInflater().inflate(R.layout.download_alertdialog, null);
+            View dialogView = activity.getLayoutInflater().inflate(R.layout.alertdialog_download, null);
             alertDialog.setView(dialogView);
             alertDialog.setCancelable(false);
 
