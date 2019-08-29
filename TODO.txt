@@ -1,14 +1,20 @@
-• lien youtube en préférence
-• modifier la sortie audio
-• enregistrer la miniature comme image d'album (mp3)
+• modifier la sortie audio (MODIFY_AUDIO_SETTINGS ?)
 • glisser vers le bas pour reload
 • filtrer les caractères spéciaux dans les titres
-• autoriser connexion youtube
+• autoriser connexion compte youtube
 • bouton home (page accueil youtube) & actualiser
 • bloquer boutons alertdialog quand les données ne sont pas encore chargées (ou attendre avant d'afficher)
 
 Téléchargements :
-• notification quand téléchargement fini // à tester
 • téléchargement vidéos
 • renommer fichier après téléchargement
 • découpage
+• enregistrer la miniature comme image d'album (mp3)
+
+Paramètres :
+• lien youtube
+• téléchargement en wifi uniquement (ACCESS_NETWORK_STATE et/ou ACCESS_WIFI_STATE)
+• affichage ordinateur
+• emplacement des téléchargements
+• avertissement fichier volumineux
+• taille minimum avertissement
