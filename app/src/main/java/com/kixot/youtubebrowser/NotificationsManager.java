@@ -39,7 +39,9 @@ public class NotificationsManager {
                 .setSmallIcon(R.drawable.youtube)
                 .setContentTitle(title)
                 .setContentText(content)
-                .setPriority(NotificationCompat.PRIORITY_LOW);
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+                .setPriority(NotificationCompat.PRIORITY_LOW)
+                .setAutoCancel(true);
 
         int notificationId = generateNotificationId();
 
