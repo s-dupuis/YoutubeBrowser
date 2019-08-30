@@ -9,6 +9,7 @@
 
     <string name="action_clear">Vider</string>
     <string name="action_home">Accueil</string>
+    <string name="action_refresh">Actualiser</string>
 
     <string name="channel_name">Téléchargements</string>
     <string name="channel_description">Données relatives aux téléchargements</string>

@@ -7,4 +7,11 @@
         android:title="@string/action_home"
         android:icon="@drawable/baseline_home_white_24"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_refresh"
+        android:orderInCategory="99"
+        android:title="@string/action_refresh"
+        android:icon="@drawable/baseline_refresh_white_24"
+        app:showAsAction="always" />
 </menu>

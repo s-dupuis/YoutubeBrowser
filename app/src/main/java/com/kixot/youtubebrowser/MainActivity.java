@@ -123,6 +123,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this.youtubeWebView.loadUrl(YoutubeManager.url);
             }
             return true;
+        } else if (id == R.id.action_refresh) {
+            this.youtubeWebView.reload();
         }
 
         return super.onOptionsItemSelected(item);
