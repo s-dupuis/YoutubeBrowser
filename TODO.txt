@@ -1,7 +1,6 @@
 • modifier la sortie audio (MODIFY_AUDIO_SETTINGS ?)
 • glisser vers le bas pour reload
 • filtrer les caractères spéciaux dans les titres
-• autoriser connexion compte youtube
 
 Téléchargements :
 • téléchargement vidéos

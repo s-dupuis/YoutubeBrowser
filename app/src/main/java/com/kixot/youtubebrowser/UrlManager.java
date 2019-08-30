@@ -1,9 +1,18 @@
 package com.kixot.youtubebrowser;
 
+import android.util.Log;
+
 public class UrlManager {
 
     private String initialUrl;
     private String currentUrl;
+
+    private String[] connexionUrls = new String[]{
+            "accounts.google.com",
+            "accounts.youtube.com",
+            "accounts.google.fr",
+            "youtube.com"
+    };
 
     UrlManager(String url) {
         this.initialUrl = url;
@@ -19,7 +28,10 @@ public class UrlManager {
     }
 
     public boolean isYoutube(String url) {
-        return url.contains(initialUrl);
+        boolean allowed = false;
+        for (String u : connexionUrls) allowed = allowed || url.contains(u);
+
+        return url.contains(initialUrl) || allowed;
     }
 
     String getInitialUrl() {
