@@ -7,7 +7,6 @@
         <EditTextPreference
             android:key="youtube_url"
             android:title="Adresse Youtube"
-            android:summary="https://m.youtube.com/"
             android:defaultValue="https://m.youtube.com/"
             android:icon="@drawable/baseline_router_black_24"/>
 

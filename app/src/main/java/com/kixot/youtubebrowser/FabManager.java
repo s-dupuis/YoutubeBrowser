@@ -2,7 +2,9 @@ package com.kixot.youtubebrowser;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.Editable;
@@ -10,6 +12,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 import com.kixot.youtubebrowser.models.Download;
@@ -23,12 +26,14 @@ public class FabManager {
     private FloatingActionButton downloadFab, downloadMusicFab, downloadVideoFab;
     private boolean isDownloadFabOpen = false;
     private DownloadsTable downloadsTable;
+    private boolean wifiOnly;
 
-    public FabManager (MainActivity activity, UrlManager urlManager) {
+    public FabManager (MainActivity activity, UrlManager urlManager, boolean wifiOnly) {
         this.activity = activity;
         this.urlManager = urlManager;
         this.youtubeManager = new YoutubeManager(urlManager);
         this.downloadsTable = new DownloadsTable(activity);
+        this.wifiOnly = wifiOnly;
         downloadsTable.open();
     }
 
@@ -43,53 +48,74 @@ public class FabManager {
         });
 
         downloadMusicFab.setOnClickListener(view -> {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
-            View dialogView = activity.getLayoutInflater().inflate(R.layout.alertdialog_download, null);
-            alertDialog.setView(dialogView);
-            alertDialog.setCancelable(false);
 
-            ImageView thumbnailImageView = (ImageView) dialogView.findViewById(R.id.thumbnailImageView);
-            EditText titleEditText = (EditText) dialogView.findViewById(R.id.titleEditText);
-            EditText endTimeEditText = (EditText) dialogView.findViewById(R.id.endTimeEditText);
+            if (wifiOnly && !activity.checkHasWifi()) {
+                showWifiOnly();
+            } else {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
+                View dialogView = activity.getLayoutInflater().inflate(R.layout.alertdialog_download, null);
+                alertDialog.setView(dialogView);
+                alertDialog.setCancelable(false);
 
-            alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
-                long downloadId = downloadsTable.insertDownload(new Download(
-                        titleEditText.getText().toString(),
-                        0,
-                        "audio"
-                ));
+                ImageView thumbnailImageView = (ImageView) dialogView.findViewById(R.id.thumbnailImageView);
+                EditText titleEditText = (EditText) dialogView.findViewById(R.id.titleEditText);
+                EditText endTimeEditText = (EditText) dialogView.findViewById(R.id.endTimeEditText);
 
-                if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                    youtubeManager.downloadAudio(downloadId, downloadsTable, activity.findViewById(android.R.id.content));
-            });
+                alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
 
-            alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
+                    long downloadId = downloadsTable.insertDownload(new Download(
+                            titleEditText.getText().toString(),
+                            0,
+                            "audio"
+                    ));
 
-            AlertDialog createdAlertDialog = alertDialog.create();
-            createdAlertDialog.show();
+                    if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                        youtubeManager.downloadAudio(downloadId, downloadsTable, activity.findViewById(android.R.id.content));
+                });
 
-            createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {
+                });
 
-            titleEditText.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+                AlertDialog createdAlertDialog = alertDialog.create();
+                createdAlertDialog.show();
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) { }
+                createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
 
-                @Override
-                public void afterTextChanged(Editable s) {
-                    createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(titleEditText.getText().toString().length() > 0);
-                }
-            });
+                titleEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
 
-            youtubeManager.downloadThumbnail(thumbnailImageView);
-            youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
 
-            createdAlertDialog.show();
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(titleEditText.getText().toString().length() > 0);
+                    }
+                });
+
+                youtubeManager.downloadThumbnail(thumbnailImageView);
+                youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
+
+                createdAlertDialog.show();
+            }
+
         });
 
         downloadVideoFab.setOnClickListener(view -> Snackbar.make(view, "MP4", Snackbar.LENGTH_LONG).setAction("OK", null).show());
+    }
+
+    private void showWifiOnly(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
+
+        alertDialog.setMessage("Une connexion Wifi est requise pour télécharger une vidéo. Allez dans les paramètres pour retirer ce contrôle.");
+        alertDialog.setCancelable(true);
+
+        alertDialog.setPositiveButton("OK", (dialogInterface, i) -> {});
+
+        alertDialog.create().show();
     }
 
     private void showFABMenu(){

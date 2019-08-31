@@ -9,9 +9,8 @@ Téléchargements :
 • enregistrer la miniature comme image d'album (https://developer.android.com/reference/android/provider/MediaStore.Audio.AlbumColumns)
 
 Paramètres :
-• lien youtube
-• téléchargement en wifi uniquement (ACCESS_NETWORK_STATE et/ou ACCESS_WIFI_STATE)
 • affichage ordinateur (https://stackoverflow.com/questions/14688030/setting-webview-to-view-desktop-site-and-not-mobile-site)
 • emplacement des téléchargements (https://stackoverflow.com/questions/44094637/select-folder-dialog-on-android)
 • avertissement fichier volumineux
 • taille minimum avertissement
+• valeurs par défaut

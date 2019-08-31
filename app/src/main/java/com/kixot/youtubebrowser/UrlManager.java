@@ -34,6 +34,10 @@ public class UrlManager {
         return url.contains(initialUrl) || allowed;
     }
 
+    public static boolean isUrlValid(String url) {
+        return url.contains(".com");
+    }
+
     String getInitialUrl() {
         return initialUrl;
     }

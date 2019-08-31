@@ -1,11 +1,16 @@
 package com.kixot.youtubebrowser;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 import com.kixot.youtubebrowser.activities.AboutActivity;
 import com.kixot.youtubebrowser.activities.DownloadsActivity;
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private DownloadsTable downloadsTable;
 
+    public String preference_YoutubeURL;
+    public boolean preference_WifiOnly;
+
     public final static String downloadPath = Environment.getExternalStorageDirectory()+ File.separator+"/YoutubeBrowser";
 
     @Override
@@ -47,8 +56,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
         });
 
-        urlManager = new UrlManager(YoutubeManager.url);
-        fabManager = new FabManager(this, urlManager);
+        android.support.v7.preference.PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        preference_YoutubeURL = sharedPreferences.getString("youtube_url", "https://m.youtube.com/");
+        preference_WifiOnly = sharedPreferences.getBoolean("wifi_download", true);
+
+        urlManager = new UrlManager(preference_YoutubeURL);
+        fabManager = new FabManager(this, urlManager, preference_WifiOnly);
 
         fabManager.loadDownloadFabs();
         loadYoutubeWebView();
@@ -65,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        android.support.v7.preference.PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-
     }
 
     private void requestPermissions (String[] permissions) {
@@ -80,7 +93,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         youtubeWebView.getSettings().setLoadsImagesAutomatically(true);
         youtubeWebView.getSettings().setJavaScriptEnabled(true);
         youtubeWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-        youtubeWebView.loadUrl(YoutubeManager.url);
+        youtubeWebView.loadUrl(preference_YoutubeURL);
+    }
+
+    public boolean checkHasWifi() {
+        final ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        final Network network = connectivityManager.getActiveNetwork();
+
+        if (network != null) {
+            final NetworkCapabilities nc = connectivityManager.getNetworkCapabilities(network);
+            return nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI);
+        }
+        return false;
     }
 
     private void exitApp(){
@@ -118,9 +143,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.action_home) {
-            if (!this.youtubeWebView.getUrl().equals(YoutubeManager.url)) {
+            if (!this.youtubeWebView.getUrl().equals(preference_YoutubeURL)) {
                 this.youtubeWebView.clearHistory();
-                this.youtubeWebView.loadUrl(YoutubeManager.url);
+                this.youtubeWebView.loadUrl(preference_YoutubeURL);
             }
             return true;
         } else if (id == R.id.action_refresh) {
