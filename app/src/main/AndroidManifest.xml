@@ -29,7 +29,8 @@
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/nav_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

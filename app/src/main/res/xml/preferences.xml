@@ -13,6 +13,7 @@
         <SwitchPreference
             android:key="computer_mode"
             android:title="Affichage ordinateur"
+            android:defaultValue="false"
             android:icon="@drawable/baseline_desktop_windows_black_24"/>
 
     </PreferenceCategory>
@@ -20,11 +21,10 @@
     <PreferenceCategory
         android:title="Téléchargements">
 
-        <EditTextPreference
+        <Preference
             android:key="downloads_path"
             android:title="Emplacement des téléchargements"
-            android:summary="/"
-            android:defaultValue="/"
+            android:defaultValue="content://com.android.externalstorage.documents/tree/primary/%3AYoutubeBrowser"
             android:icon="@drawable/baseline_folder_open_black_24"/>
 
         <CheckBoxPreference

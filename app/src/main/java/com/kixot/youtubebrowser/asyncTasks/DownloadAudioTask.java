@@ -22,11 +22,13 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
     private Download download;
     private DownloadsTable downloadsTable;
     private View viewSnackbar;
+    private String downloadsPath;
 
-    public DownloadAudioTask (long downloadId, DownloadsTable downloadsTable, View viewSnackbar) {
+    public DownloadAudioTask (long downloadId, DownloadsTable downloadsTable, View viewSnackbar, String downloadsPath) {
         this.download = downloadsTable.getDownload(downloadId);
         this.downloadsTable = downloadsTable;
         this.viewSnackbar = viewSnackbar;
+        this.downloadsPath = downloadsPath;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
 
         try {
             YoutubeVideo video = YoutubeDownloader.getVideo(videoIds[0]);
-            File outputDir = new File(MainActivity.downloadPath+"/musics");
+            File outputDir = new File(downloadsPath+"/musics");
 
             List<AudioFormat> audios = video.findAudioWithQuality(AudioQuality.high);
             AudioQuality[] audioQualities = new AudioQuality[] { AudioQuality.high, AudioQuality.medium, AudioQuality.low, AudioQuality.unknown };

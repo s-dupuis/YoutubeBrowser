@@ -30,8 +30,8 @@ public class YoutubeManager {
         task.execute(urlManager.getVideoId());
     }
 
-    public void downloadAudio (long downloadId, DownloadsTable downloadsTable, View viewSnackbar) {
-        DownloadAudioTask task = new DownloadAudioTask(downloadId, downloadsTable, viewSnackbar);
+    public void downloadAudio (long downloadId, DownloadsTable downloadsTable, View viewSnackbar, String downloadsPath) {
+        DownloadAudioTask task = new DownloadAudioTask(downloadId, downloadsTable, viewSnackbar, downloadsPath);
         task.execute(urlManager.getVideoId());
     }
 

@@ -41,8 +41,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public String preference_YoutubeURL;
     public boolean preference_WifiOnly;
+    public String preference_downloadsPath;
 
-    public final static String downloadPath = Environment.getExternalStorageDirectory()+ File.separator+"/YoutubeBrowser";
+    //public String downloadPath = Environment.getExternalStorageDirectory()+ File.separator+"/YoutubeBrowser";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +62,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         preference_YoutubeURL = sharedPreferences.getString("youtube_url", "https://m.youtube.com/");
         preference_WifiOnly = sharedPreferences.getBoolean("wifi_download", true);
+        preference_downloadsPath = sharedPreferences.getString("downloads_path", "content://com.android.externalstorage.documents/tree/primary/%3AYoutubeBrowser");
 
         urlManager = new UrlManager(preference_YoutubeURL);
-        fabManager = new FabManager(this, urlManager, preference_WifiOnly);
+        fabManager = new FabManager(this, urlManager);
 
         fabManager.loadDownloadFabs();
         loadYoutubeWebView();

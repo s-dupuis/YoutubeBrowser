@@ -27,13 +27,16 @@ public class FabManager {
     private boolean isDownloadFabOpen = false;
     private DownloadsTable downloadsTable;
     private boolean wifiOnly;
+    private String downloadsPath;
 
-    public FabManager (MainActivity activity, UrlManager urlManager, boolean wifiOnly) {
+    public FabManager (MainActivity activity, UrlManager urlManager) {
         this.activity = activity;
         this.urlManager = urlManager;
         this.youtubeManager = new YoutubeManager(urlManager);
         this.downloadsTable = new DownloadsTable(activity);
-        this.wifiOnly = wifiOnly;
+        this.wifiOnly = activity.preference_WifiOnly;
+        this.downloadsPath = activity.preference_downloadsPath;
+
         downloadsTable.open();
     }
 
@@ -70,7 +73,7 @@ public class FabManager {
                     ));
 
                     if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
-                        youtubeManager.downloadAudio(downloadId, downloadsTable, activity.findViewById(android.R.id.content));
+                        youtubeManager.downloadAudio(downloadId, downloadsTable, activity.findViewById(android.R.id.content), downloadsPath);
                 });
 
                 alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {
