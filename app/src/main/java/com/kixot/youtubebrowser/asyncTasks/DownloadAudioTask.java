@@ -58,6 +58,9 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
 
                     @Override
                     public void onFinished(File file) {
+                        File newFile = new File(file.getPath(), title);
+                        file.renameTo(newFile);
+
                         downloadsTable.updateProgress(downloadId, 100);
                         downloadsTable.updateStatus(downloadId, "finished");
                         Snackbar.make(viewSnackbar, "Le téléchargement de "+title+" est terminé.", Snackbar.LENGTH_LONG).setAction("OK", v -> {}).show();
