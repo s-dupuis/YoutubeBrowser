@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 import com.kixot.youtubebrowser.models.Download;
 import com.kixot.youtubebrowser.utils.Permissions;
+import com.kixot.youtubebrowser.utils.Sanitize;
 
 public class FabManager {
 
@@ -67,7 +68,7 @@ public class FabManager {
                 alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
 
                     long downloadId = downloadsTable.insertDownload(new Download(
-                            titleEditText.getText().toString(),
+                            Sanitize.sanitizeTitle(titleEditText.getText()),
                             0,
                             "audio"
                     ));
@@ -76,8 +77,7 @@ public class FabManager {
                         youtubeManager.downloadAudio(downloadId, downloadsTable, activity.findViewById(android.R.id.content), downloadsPath);
                 });
 
-                alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {
-                });
+                alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> { });
 
                 AlertDialog createdAlertDialog = alertDialog.create();
                 createdAlertDialog.show();
