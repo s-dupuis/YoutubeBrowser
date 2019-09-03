@@ -40,8 +40,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DownloadsTable downloadsTable;
 
     public String preference_YoutubeURL;
-    public boolean preference_WifiOnly;
     public String preference_downloadsPath;
+    public boolean preference_WifiOnly;
+    public boolean preference_DesktopMode;
 
     //public String downloadPath = Environment.getExternalStorageDirectory()+ File.separator+"/YoutubeBrowser";
 
@@ -63,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         preference_YoutubeURL = sharedPreferences.getString("youtube_url", "https://m.youtube.com/");
         preference_WifiOnly = sharedPreferences.getBoolean("wifi_download", true);
         preference_downloadsPath = sharedPreferences.getString("downloads_path", "content://com.android.externalstorage.documents/tree/primary/%3AYoutubeBrowser");
+        preference_DesktopMode = sharedPreferences.getBoolean("desktop_mode", false);
 
         urlManager = new UrlManager(preference_YoutubeURL);
         fabManager = new FabManager(this, urlManager);
@@ -94,8 +96,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         youtubeWebView.setWebViewClient(new YoutubeWebViewClient(urlManager, fabManager));
         youtubeWebView.getSettings().setLoadsImagesAutomatically(true);
         youtubeWebView.getSettings().setJavaScriptEnabled(true);
-        youtubeWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         youtubeWebView.loadUrl(preference_YoutubeURL);
+
+        if (preference_DesktopMode) {
+            youtubeWebView.getSettings().setLoadWithOverviewMode(true);
+            youtubeWebView.getSettings().setUseWideViewPort(true);
+
+            youtubeWebView.getSettings().setSupportZoom(true);
+            youtubeWebView.getSettings().setBuiltInZoomControls(true);
+            youtubeWebView.getSettings().setDisplayZoomControls(false);
+
+            youtubeWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+            youtubeWebView.setScrollbarFadingEnabled(false);
+        } else {
+            youtubeWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        }
+
     }
 
     public boolean checkHasWifi() {

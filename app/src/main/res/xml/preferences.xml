@@ -11,7 +11,7 @@
             android:icon="@drawable/baseline_router_black_24"/>
 
         <SwitchPreference
-            android:key="computer_mode"
+            android:key="desktop_mode"
             android:title="Affichage ordinateur"
             android:defaultValue="false"
             android:icon="@drawable/baseline_desktop_windows_black_24"/>
