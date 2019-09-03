@@ -34,7 +34,7 @@
             android:defaultValue="true"
             android:icon="@drawable/baseline_signal_wifi_4_bar_lock_black_24"/>
 
-        <CheckBoxPreference
+        <!--<CheckBoxPreference
             android:key="display_download_warning"
             android:title="Afficher un avertissement"
             android:summary="Affiche un avertissement quand le fichier à télécharger est volumineux"
@@ -46,7 +46,7 @@
             android:title="Taille minimum pour l'avertissement"
             android:summary="L'avertissement s'affiche si la taille du fichier est supérieure à cette valeur"
             android:defaultValue="200Mo"
-            android:icon="@drawable/baseline_sd_storage_black_24"/>
+            android:icon="@drawable/baseline_sd_storage_black_24"/>-->
 
     </PreferenceCategory>
 

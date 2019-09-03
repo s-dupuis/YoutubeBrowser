@@ -1,11 +1,13 @@
 package com.kixot.youtubebrowser.asyncTasks;
 
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 
 import com.github.kiulian.downloader.YoutubeDownloader;
+import com.github.kiulian.downloader.model.VideoDetails;
 import com.github.kiulian.downloader.model.YoutubeVideo;
 import com.github.kiulian.downloader.model.formats.AudioFormat;
 import com.github.kiulian.downloader.model.quality.AudioQuality;
