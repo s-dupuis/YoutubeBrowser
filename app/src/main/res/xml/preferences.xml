@@ -50,4 +50,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="Divers">
+
+        <Preference
+            android:key="reset_settings"
+            android:title="Restaurer les paramètres par défaut"
+            android:icon="@drawable/baseline_settings_backup_restore_black_24"/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

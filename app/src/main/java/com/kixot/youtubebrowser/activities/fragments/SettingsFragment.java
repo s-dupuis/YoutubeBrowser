@@ -1,6 +1,7 @@
 package com.kixot.youtubebrowser.activities.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.view.SurfaceHolder;
 import android.view.View;
 
 import com.kixot.youtubebrowser.R;
@@ -36,6 +38,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         youtubeUrl();
         downloadsPath();
+        resetSettings();
 
     }
 
@@ -64,6 +67,29 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             return true;
         });
 
+    }
+
+    private void resetSettings() {
+        Preference reset_settings = findPreference("reset_settings");
+
+        reset_settings.setOnPreferenceClickListener(preference -> {
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+
+            alertDialog.setMessage("Voulez-vous restaurer les paramètres par défaut ?");
+            alertDialog.setCancelable(true);
+
+            alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> {});
+            alertDialog.setPositiveButton(R.string.yes, (dialog, which) -> {
+                editor.clear();
+                editor.apply();
+
+                Snackbar.make(snackbarView, "Les paramètres ont été mis à jour.", Snackbar.LENGTH_SHORT).show();
+            });
+
+            alertDialog.create().show();
+
+            return true;
+        });
     }
 
     @Override
