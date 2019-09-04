@@ -76,11 +76,11 @@ public class DownloadListViewAdapter extends BaseAdapter {
         switch (download.getStatus()) {
             case "downloading":
                 progressText = download.getProgress() + "%";
-                color = Color.CYAN;
+                color = Color.rgb(51, 153, 204);
                 break;
             case "error":
                 progressText = "Une erreur est survenue.";
-                color = Color.RED;
+                color = Color.rgb(200, 0, 0);
                 break;
             case "canceled":
                 progressText = "Téléchargement annulé.";
@@ -88,7 +88,7 @@ public class DownloadListViewAdapter extends BaseAdapter {
                 break;
             case "finished":
                 progressText = "Téléchargement terminé.";
-                color = Color.GREEN;
+                color = Color.rgb(0, 204, 0);
                 break;
         }
 
