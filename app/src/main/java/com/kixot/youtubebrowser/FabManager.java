@@ -107,7 +107,59 @@ public class FabManager {
 
         });
 
-        downloadVideoFab.setOnClickListener(view -> Snackbar.make(view, "MP4", Snackbar.LENGTH_LONG).setAction("OK", null).show());
+        downloadVideoFab.setOnClickListener(view -> {
+            if (wifiOnly && !activity.checkHasWifi()) {
+                showWifiOnly();
+            } else {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
+                View dialogView = activity.getLayoutInflater().inflate(R.layout.alertdialog_download, null);
+                alertDialog.setView(dialogView);
+                alertDialog.setCancelable(false);
+
+                ImageView thumbnailImageView = (ImageView) dialogView.findViewById(R.id.thumbnailImageView);
+                EditText titleEditText = (EditText) dialogView.findViewById(R.id.titleEditText);
+                EditText endTimeEditText = (EditText) dialogView.findViewById(R.id.endTimeEditText);
+
+                alertDialog.setPositiveButton(R.string.download, (dialog, which) -> {
+
+                    long downloadId = downloadsTable.insertDownload(new Download(
+                            Sanitize.sanitizeTitle(titleEditText.getText()),
+                            0,
+                            "video"
+                    ));
+
+                    if (Permissions.requestPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                        youtubeManager.downloadVideo(downloadId, downloadsTable, activity.findViewById(android.R.id.content), downloadsPath);
+                });
+
+                alertDialog.setNegativeButton(R.string.cancel, (dialog, which) -> { });
+
+                AlertDialog createdAlertDialog = alertDialog.create();
+                createdAlertDialog.show();
+
+                createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+
+                titleEditText.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        createdAlertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(titleEditText.getText().toString().length() > 0);
+                    }
+                });
+
+                youtubeManager.downloadThumbnail(thumbnailImageView);
+                youtubeManager.getVideoDetails(titleEditText, endTimeEditText);
+
+                createdAlertDialog.show();
+            }
+        });
     }
 
     private void showWifiOnly(){

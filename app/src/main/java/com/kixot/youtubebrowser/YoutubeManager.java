@@ -6,12 +6,12 @@ import android.widget.ImageView;
 
 import com.kixot.youtubebrowser.asyncTasks.DownloadThumbnailTask;
 import com.kixot.youtubebrowser.asyncTasks.DownloadAudioTask;
+import com.kixot.youtubebrowser.asyncTasks.DownloadVideoTask;
 import com.kixot.youtubebrowser.asyncTasks.GetVideoDetailsTask;
 import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 
 public class YoutubeManager {
 
-    //public static final String url = "https://m.youtube.com/";
     public static final String thumbnailUrl = "https://img.youtube.com/vi/[videoId]/hqdefault.jpg";
 
     private UrlManager urlManager;
@@ -32,6 +32,11 @@ public class YoutubeManager {
 
     public void downloadAudio (long downloadId, DownloadsTable downloadsTable, View viewSnackbar, String downloadsPath) {
         DownloadAudioTask task = new DownloadAudioTask(downloadId, downloadsTable, viewSnackbar, downloadsPath);
+        task.execute(urlManager.getVideoId());
+    }
+
+    public void downloadVideo (long downloadId, DownloadsTable downloadsTable, View viewSnackbar, String downloadsPath) {
+        DownloadVideoTask task = new DownloadVideoTask(downloadId, downloadsTable, viewSnackbar, downloadsPath);
         task.execute(urlManager.getVideoId());
     }
 

@@ -11,12 +11,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.view.SurfaceHolder;
 import android.view.View;
 
 import com.kixot.youtubebrowser.R;
 import com.kixot.youtubebrowser.UrlManager;
-import com.kixot.youtubebrowser.utils.FileUtil;
+import com.kixot.youtubebrowser.utils.FileUtils;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -97,7 +96,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         if (requestCode == DOWNLOAD_PATH_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
             Uri uri = data.getData();
 
-            String path = FileUtil.getFullPathFromTreeUri(uri, getActivity());
+            String path = FileUtils.getFullPathFromTreeUri(uri, getActivity());
 
             if (path.contains("/storage/emulated")) {
                 editor.putString("downloads_path", path);

@@ -13,8 +13,15 @@ import java.io.File;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 
-public final class FileUtil {
+public final class FileUtils {
     private static final String PRIMARY_VOLUME_NAME = "primary";
+
+    public static String getExtension(String path) {
+        String extension = "";
+        int i = path.lastIndexOf(".");
+        if (i > 0) extension = path.substring(i+1);
+        return extension;
+    }
 
     @Nullable
     public static String getFullPathFromTreeUri(@Nullable final Uri treeUri, Context con) {

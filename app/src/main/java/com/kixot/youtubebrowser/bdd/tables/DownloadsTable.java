@@ -56,7 +56,7 @@ public class DownloadsTable {
     }
 
     public ArrayList<Download> getDownloads() {
-        String query = "SELECT * FROM " + TABLE_NAME + ";";
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY "+ FIELD_ID + " DESC;";
         Cursor c = bdd.rawQuery(query, new String[]{});
         return cursorToListDownload(c);
     }

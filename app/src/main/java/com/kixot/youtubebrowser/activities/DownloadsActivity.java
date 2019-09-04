@@ -16,6 +16,7 @@ import com.kixot.youtubebrowser.bdd.tables.DownloadsTable;
 import com.kixot.youtubebrowser.models.Download;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -45,6 +46,7 @@ public class DownloadsActivity extends AppCompatActivity {
         downloadsListView = (ListView) findViewById(R.id.downloadsListView);
 
         downloads = downloadsTable.getDownloads();
+
         downloadListViewAdapter = new DownloadListViewAdapter(this, downloads, downloadsTable);
 
         downloadsListView.setAdapter(downloadListViewAdapter);
