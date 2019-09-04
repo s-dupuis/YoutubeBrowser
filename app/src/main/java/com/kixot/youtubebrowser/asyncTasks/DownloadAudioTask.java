@@ -61,7 +61,11 @@ public class DownloadAudioTask extends AsyncTask<String, Void, Void> {
                     @Override
                     public void onFinished(File file) {
                         File newFile = new File(file.getPath(), title);
-                        file.renameTo(newFile);
+                        Log.d("renameFile/file.getPath", file.getPath());
+                        Log.d("renameFile/file.getAbso", file.getAbsolutePath());
+                        Log.d("renameFile/file.toPath", file.toURI().toString());
+                        Log.d("renameFile/new.getAbso", newFile.getAbsolutePath());
+                        Log.d("renameFile/renameTo", file.renameTo(newFile) ? "ok" : "pas ok");
 
                         downloadsTable.updateProgress(downloadId, 100);
                         downloadsTable.updateStatus(downloadId, "finished");

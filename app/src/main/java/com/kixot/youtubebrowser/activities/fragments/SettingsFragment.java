@@ -59,7 +59,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private void downloadsPath() {
         downloads_path = findPreference("downloads_path");
-        downloads_path.setSummary(sharedPreferences.getString("downloads_path", "content://com.android.externalstorage.documents/tree/primary/%3AYoutubeBrowser"));
+        downloads_path.setSummary(sharedPreferences.getString("downloads_path", "/storage/0/sdcard/YoutubeBrowser"));
 
         downloads_path.setOnPreferenceClickListener(preference -> {
             Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);

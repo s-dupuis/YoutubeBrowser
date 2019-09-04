@@ -3,14 +3,13 @@
 
 Téléchargements :
 • téléchargement vidéos
-// • renommer fichier après téléchargement (https://stackoverflow.com/questions/10424997/android-how-to-rename-a-file)
+// NOT_WORKING • renommer fichier après téléchargement (https://stackoverflow.com/questions/10424997/android-how-to-rename-a-file)
 • découpage audio (https://stackoverflow.com/questions/7546010/obtaining-an-audioinputstream-upto-some-x-bytes-from-the-original-cutting-an-au/7547123#7547123)
 • découpage vidéo (https://stackoverflow.com/questions/50501049/how-to-trim-the-video-with-start-end-time-in-android-programmatically)
 • enregistrer la miniature comme image d'album (https://developer.android.com/reference/android/provider/MediaStore.Audio.AlbumColumns)
 
 Paramètres :
-• affichage ordinateur (https://stackoverflow.com/questions/14688030/setting-webview-to-view-desktop-site-and-not-mobile-site)
-// • valeurs par défaut (https://stackoverflow.com/questions/46655743/android-restore-applications-default-preferences)
+// NOT WORKING • valeurs par défaut (https://stackoverflow.com/questions/46655743/android-restore-applications-default-preferences)
 
 Bugs :
 • téléchargements annulés quand : paramètres -> retour main_activity

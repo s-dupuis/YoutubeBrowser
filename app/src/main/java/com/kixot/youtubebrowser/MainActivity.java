@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         preference_YoutubeURL = sharedPreferences.getString("youtube_url", "https://m.youtube.com/");
         preference_WifiOnly = sharedPreferences.getBoolean("wifi_download", true);
-        preference_downloadsPath = sharedPreferences.getString("downloads_path", "content://com.android.externalstorage.documents/tree/primary/%3AYoutubeBrowser");
+        preference_downloadsPath = sharedPreferences.getString("downloads_path", "/storage/0/sdcard/YoutubeBrowser");
         preference_DesktopMode = sharedPreferences.getBoolean("desktop_mode", false);
 
         urlManager = new UrlManager(preference_YoutubeURL);
@@ -108,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             youtubeWebView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
             youtubeWebView.setScrollbarFadingEnabled(false);
+
+            youtubeWebView.getSettings().setUserAgentString("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1");
         } else {
             youtubeWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         }
